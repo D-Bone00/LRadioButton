@@ -16,7 +16,7 @@ class ViewController: UIViewController, LRadioButtonDelegate {
     lazy var radioButton1: LRadioButton = {
         let radioButton: LRadioButton = LRadioButton(frame: .zero,
                                                      title: "radioButton1" ,
-                                                     lRadioFrame: CGRect(x: 10, y: 10, width: 30, height: 30),
+                                                     lRadioViewSize: CGSize(width: 30, height: 30),
                                                      color: .blue,
                                                      tag: 1
         )
@@ -30,7 +30,7 @@ class ViewController: UIViewController, LRadioButtonDelegate {
         lazy var radioButton2: LRadioButton = {
             let radioButton: LRadioButton = LRadioButton(frame: .zero,
                                                          title: "radioButton2aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" ,
-                                                         lRadioFrame: CGRect(x: 10, y: 10, width: 30, height: 30),
+                                                         lRadioViewSize: CGSize(width: 30, height: 30),
                                                          color: .red,
                                                          tag: 2
             )
@@ -44,7 +44,7 @@ class ViewController: UIViewController, LRadioButtonDelegate {
           lazy var radioButton3: LRadioButton = {
             let radioButton: LRadioButton = LRadioButton(frame: .zero,
                                                            title: "radioButton3" ,
-                                                           lRadioFrame: CGRect(x: 10, y: 10, width: 30, height: 30),
+                                                           lRadioViewSize: CGSize(width: 30, height: 30),
                                                            color: .orange,
                                                            tag: 3
               )
@@ -52,6 +52,18 @@ class ViewController: UIViewController, LRadioButtonDelegate {
               
               return radioButton
           }()
+    
+    lazy var radioButton4: LRadioButton = {
+      let radioButton: LRadioButton = LRadioButton(frame: .zero,
+                                                     title: "radioButton4" ,
+                                                     lRadioViewSize: CGSize(width: 30, height: 30),
+                                                     color: nil,
+                                                     tag: 4
+        )
+        radioButton.delegate = self
+        
+        return radioButton
+    }()
     
     
     /// ラジオボタンを格納する配列
@@ -88,12 +100,21 @@ class ViewController: UIViewController, LRadioButtonDelegate {
         radioButton3.trailingAnchor.constraint(equalTo: radioButton1.trailingAnchor).isActive = true
         radioButton3.heightAnchor.constraint(equalToConstant: radioButton3.frame.height).isActive = true
         
+        radioButton4.sizeToFit()
+        view.addSubview(radioButton4)
+        radioButton4.translatesAutoresizingMaskIntoConstraints = false
+        radioButton4.topAnchor.constraint(equalTo: radioButton3.bottomAnchor, constant: 5).isActive = true
+        radioButton4.leadingAnchor.constraint(equalTo: radioButton1.leadingAnchor).isActive = true
+        radioButton4.trailingAnchor.constraint(equalTo: radioButton1.trailingAnchor).isActive = true
+        radioButton4.heightAnchor.constraint(equalToConstant: radioButton4.frame.height).isActive = true
+        
         
         
      
         radioButtons.append(radioButton1)
         radioButtons.append(radioButton2)
         radioButtons.append(radioButton3)
+        radioButtons.append(radioButton4)
     }
 
     

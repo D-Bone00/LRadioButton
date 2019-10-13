@@ -41,24 +41,21 @@ public class LRadioButton: UIButton {
     }
     
     
-    public convenience init(frame: CGRect, title:String? = nil, lRadioFrame: CGRect, color: UIColor?, tag: Int) {
+    public convenience init(frame: CGRect, title:String? = nil, lRadioViewSize: CGSize, color: UIColor?, tag: Int) {
         self.init(frame: frame)
 
         addTarget(target, action: #selector(radioButtontapAction(sender:)), for: .touchUpInside)
         self.tag = tag
         setTitle(title, for: .normal)
         setTitleColor(.black, for: .normal)
-        titleEdgeInsets = .init(top: .zero, left: lRadioFrame.origin.x + lRadioFrame.width + 5, bottom: 0, right: 0)
+        titleEdgeInsets = .init(top: .zero, left: lRadioViewSize.height + 15, bottom: 0, right: 0)
         contentHorizontalAlignment = .left
         titleLabel?.numberOfLines = 0
         titleLabel?.sizeToFit()
         
         
-        lRadioView = LRadioView(frame: lRadioFrame, color: color)
+        lRadioView = LRadioView(size: lRadioViewSize, color: color)
         lRadioViewConstraint()
-        
-        
-        
     }
  
     required init?(coder: NSCoder) {
@@ -70,6 +67,7 @@ public class LRadioButton: UIButton {
     // MARK: Constraint
     
     
+    /// lRadioViewの制約
     func lRadioViewConstraint() {
         addSubview(lRadioView!)
         lRadioView?.translatesAutoresizingMaskIntoConstraints = false
@@ -146,6 +144,7 @@ public class LRadioView: UIView {
     public lazy var inView: UIView = {
         let view: UIView = UIView()
         view.frame.size = CGSize(width: self.frame.height - 10, height: self.frame.height - 10)
+        view.alpha = 0
         
         return view
     }()
@@ -158,14 +157,15 @@ public class LRadioView: UIView {
     }
     
     
-    public convenience init(frame: CGRect, color: UIColor? = .black) {
-        self.init(frame: frame)
+    public convenience init(size: CGSize, color: UIColor? = nil) {
+        self.init()
+        self.frame.size = size
         
-        selectColor = color
-        layer.cornerRadius = frame.height / 2
+        selectColor = color != nil ? color : .black
+        
+        layer.cornerRadius = size.height / 2
         layer.borderWidth = 1
         layer.borderColor = selectColor?.cgColor
-        inView.alpha = 0
         isUserInteractionEnabled = false
         
         inViewConstraint()
@@ -178,6 +178,7 @@ public class LRadioView: UIView {
     
     // MARK: Constraint
     
+    /// inViewの制約
     public func inViewConstraint() {
         addSubview(inView)
         inView.translatesAutoresizingMaskIntoConstraints = false
@@ -192,19 +193,24 @@ public class LRadioView: UIView {
     
     // MARK: Select, Deselect
     
+    /// inViewの背景色を表示する
+    ///
+    /// inViewにbackgroundColorを設定し、alphaを1にする
     public func selectView() {
         inView.backgroundColor = selectColor
         
-        UIView.animate(withDuration: 0.3) {
-            self.inView.alpha = 1
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.inView.alpha = 1
         }
     }
     
-    
+    /// inViewの背景色を非表示にする
+    ///
+    /// inViewのalphaを0にする
     public func deselectView() {
         
-        UIView.animate(withDuration: 0.1) {
-            self.inView.alpha = 0
+        UIView.animate(withDuration: 0.1) { [weak self] in
+            self?.inView.alpha = 0
         }
     }
 }
