@@ -46,8 +46,31 @@ public class LRadioButton: UIButton {
 
         addTarget(target, action: #selector(radioButtontapAction(sender:)), for: .touchUpInside)
         self.tag = tag
+        setTitle(title, for: .normal)
+        setTitleColor(.black, for: .normal)
+        titleEdgeInsets = .init(top: .zero, left: lRadioFrame.origin.x + lRadioFrame.width + 5, bottom: 0, right: 0)
+        contentHorizontalAlignment = .left
+        titleLabel?.numberOfLines = 0
+        titleLabel?.sizeToFit()
+        
         
         lRadioView = LRadioView(frame: lRadioFrame, color: color)
+        lRadioViewConstraint()
+        
+        
+        
+    }
+ 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    
+    // MARK: Constraint
+    
+    
+    func lRadioViewConstraint() {
         addSubview(lRadioView!)
         lRadioView?.translatesAutoresizingMaskIntoConstraints = false
         lRadioView?.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
@@ -55,27 +78,9 @@ public class LRadioButton: UIButton {
         lRadioView?.heightAnchor.constraint(equalToConstant: (lRadioView?.frame.height)!).isActive = true
         lRadioView?.widthAnchor.constraint(equalToConstant: (lRadioView?.frame.height)!).isActive = true
         lRadioView?.layer.borderWidth = 1
-        lRadioView?.isUserInteractionEnabled = false
-        
-
-        
-        
-        
-        bringSubviewToFront(lRadioView!)
-        
-        setTitle(title, for: .normal)
-        setTitleColor(.black, for: .normal)
-        titleEdgeInsets = .init(top: .zero, left: lRadioFrame.origin.x + lRadioFrame.width + 5, bottom: 0, right: 0)
-        contentHorizontalAlignment = .left
-        titleLabel?.numberOfLines = 0
-        
-        titleLabel?.sizeToFit()
         
     }
- 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    
     
     
     // MARK: LRadioButtonTapAction
@@ -147,26 +152,34 @@ public class LRadioView: UIView {
     
     
     // MARK: Init
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        
-        layer.cornerRadius = frame.height / 2
     }
     
     
     public convenience init(frame: CGRect, color: UIColor? = .black) {
         self.init(frame: frame)
         
-        
-        addSubview(inView)
-        
         selectColor = color
         layer.cornerRadius = frame.height / 2
         layer.borderWidth = 1
         layer.borderColor = selectColor?.cgColor
+        inView.alpha = 0
+        isUserInteractionEnabled = false
         
-        
+        inViewConstraint()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: Constraint
+    
+    public func inViewConstraint() {
+        addSubview(inView)
         inView.translatesAutoresizingMaskIntoConstraints = false
         inView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         inView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
@@ -175,21 +188,23 @@ public class LRadioView: UIView {
         inView.layer.cornerRadius = inView.frame.height / 2
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
     
     
     // MARK: Select, Deselect
     
     public func selectView() {
         inView.backgroundColor = selectColor
+        
+        UIView.animate(withDuration: 0.3) {
+            self.inView.alpha = 1
+        }
     }
     
     
     public func deselectView() {
-        inView.backgroundColor = .clear
+        
+        UIView.animate(withDuration: 0.1) {
+            self.inView.alpha = 0
+        }
     }
 }
