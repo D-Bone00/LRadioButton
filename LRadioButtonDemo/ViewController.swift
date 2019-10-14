@@ -92,6 +92,8 @@ class ViewController: UIViewController, LRadioButtonDelegate {
         radioButton2.trailingAnchor.constraint(equalTo: radioButton1.trailingAnchor).isActive = true
         radioButton2.heightAnchor.constraint(equalToConstant: radioButton2.frame.height).isActive = true
         
+        
+        radioButton3.selectColor = .green
         radioButton3.sizeToFit()
         view.addSubview(radioButton3)
         radioButton3.translatesAutoresizingMaskIntoConstraints = false
@@ -107,7 +109,7 @@ class ViewController: UIViewController, LRadioButtonDelegate {
         radioButton4.leadingAnchor.constraint(equalTo: radioButton1.leadingAnchor).isActive = true
         radioButton4.trailingAnchor.constraint(equalTo: radioButton1.trailingAnchor).isActive = true
         radioButton4.heightAnchor.constraint(equalToConstant: radioButton4.frame.height).isActive = true
-        
+
         
         
      
@@ -115,12 +117,6 @@ class ViewController: UIViewController, LRadioButtonDelegate {
         radioButtons.append(radioButton2)
         radioButtons.append(radioButton3)
         radioButtons.append(radioButton4)
-    }
-
-    
-    
-    @objc func test(radioButton: LRadioButton) {
-        print("test")
     }
     
     

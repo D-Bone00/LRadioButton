@@ -34,7 +34,17 @@ public class LRadioButton: UIButton {
     
     /// ラジオボタンのビュー
     public var lRadioView: LRadioView?
+    
+    
+    /// lRadioViewの選択された時の色とlayerの色を変える
+    public var selectColor: UIColor? {
+        didSet {
+            lRadioView?.layer.borderColor = selectColor?.cgColor
+            lRadioView?.inView.backgroundColor = selectColor
+        }
+    }
 
+    
     // MARK: init
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -136,14 +146,17 @@ public class LRadioButton: UIButton {
 public class LRadioView: UIView {
     
     
-    /// 背景色
-    public var selectColor: UIColor?
+    public override var frame: CGRect {
+        didSet {
+            inView.frame.size = CGSize(width: frame.size.width - 10, height: frame.size.height - 10)
+            inView.layer.cornerRadius = inView.frame.height / 2
+        }
+    }
     
     
     /// 選択された時にbackgroundColorを塗りつぶしたりする部分
     public lazy var inView: UIView = {
         let view: UIView = UIView()
-        view.frame.size = CGSize(width: self.frame.height - 10, height: self.frame.height - 10)
         view.alpha = 0
         
         return view
@@ -161,13 +174,12 @@ public class LRadioView: UIView {
         self.init()
         self.frame.size = size
         
-        selectColor = color != nil ? color : .black
-        
-        layer.cornerRadius = size.height / 2
         layer.borderWidth = 1
-        layer.borderColor = selectColor?.cgColor
+        layer.cornerRadius = frame.size.height / 2
+        layer.borderColor = color != nil ? color?.cgColor : UIColor.black.cgColor
         isUserInteractionEnabled = false
         
+        inView.backgroundColor =  color != nil ? color : UIColor.black
         inViewConstraint()
     }
     
@@ -186,7 +198,7 @@ public class LRadioView: UIView {
         inView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         inView.widthAnchor.constraint(equalToConstant: inView.frame.height).isActive = true
         inView.heightAnchor.constraint(equalToConstant: inView.frame.height).isActive = true
-        inView.layer.cornerRadius = inView.frame.height / 2
+        
     }
     
     
@@ -197,7 +209,6 @@ public class LRadioView: UIView {
     ///
     /// inViewにbackgroundColorを設定し、alphaを1にする
     public func selectView() {
-        inView.backgroundColor = selectColor
         
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.inView.alpha = 1
