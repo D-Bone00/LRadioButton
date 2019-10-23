@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D02031C1234F6AB000AD8081 /* LRadioButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D89546234F5D0900D40BDB /* LRadioButton.framework */; };
+		D06CC25F23608A05006D5655 /* LRadioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06CC25E23608A05006D5655 /* LRadioView.swift */; };
 		D0D8954B234F5D0900D40BDB /* LRadioButton.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D89549234F5D0900D40BDB /* LRadioButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0D89552234F5D3700D40BDB /* LRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D89551234F5D3700D40BDB /* LRadioButton.swift */; };
 		D0D8958A234F641100D40BDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D89589234F641100D40BDB /* AppDelegate.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D06CC25E23608A05006D5655 /* LRadioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRadioView.swift; sourceTree = "<group>"; };
 		D0D89546234F5D0900D40BDB /* LRadioButton.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LRadioButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0D89549234F5D0900D40BDB /* LRadioButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LRadioButton.h; sourceTree = "<group>"; };
 		D0D8954A234F5D0900D40BDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				D0D89549234F5D0900D40BDB /* LRadioButton.h */,
 				D0D8954A234F5D0900D40BDB /* Info.plist */,
 				D0D89551234F5D3700D40BDB /* LRadioButton.swift */,
+				D06CC25E23608A05006D5655 /* LRadioView.swift */,
 			);
 			path = LRadioButton;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0D89552234F5D3700D40BDB /* LRadioButton.swift in Sources */,
+				D06CC25F23608A05006D5655 /* LRadioView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
