@@ -85,7 +85,7 @@ public class LRadioButton: UIButton {
         lRadioView?.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         lRadioView?.heightAnchor.constraint(equalToConstant: (lRadioView?.frame.height)!).isActive = true
         lRadioView?.widthAnchor.constraint(equalToConstant: (lRadioView?.frame.height)!).isActive = true
-        lRadioView?.layer.borderWidth = 1
+        lRadioView?.layer.borderWidth = 1.5
         
     }
     
@@ -119,6 +119,9 @@ public class LRadioButton: UIButton {
     /// isSelectをtrueにする
     public func select() {
         lRadioView?.selectView()
+        lRadioView?.layer.shadowColor = UIColor.black.cgColor
+        lRadioView?.layer.shadowOpacity = 0.2
+        
         isSelect = true
     }
     
@@ -130,6 +133,8 @@ public class LRadioButton: UIButton {
     public func deSelect() {
         lRadioView?.deselectView()
         isSelect = false
+        lRadioView?.layer.shadowColor = UIColor.clear.cgColor
+        lRadioView?.layer.shadowOpacity = 0
     }
 }
 
