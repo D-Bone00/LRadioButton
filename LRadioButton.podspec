@@ -16,12 +16,12 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "LRadioButton"
-  spec.version      = "0.1.3"
+  spec.version      = "0.1.4"
   spec.summary      = "create RadioButton"
 
   spec.description  = "You can make a RadioButton"
 
-  spec.homepage     = "https://github.com/mdobash0318/LRadioButton"
+  spec.homepage     = "https://github.com/mdobashi0318/LRadioButton"
 
   spec.author       = "Masaharu Dobashi"
   spec.license      = { :type => "MIT", :file => "LICENSE" }
@@ -31,7 +31,7 @@ Pod::Spec.new do |spec|
   spec.ios.deployment_target = "10.0"
 
 
-  spec.source       = { :git => "https://github.com/mdobash0318/LRadioButton.git", :tag => "v#{spec.version}" }
+  spec.source       = { :git => "https://github.com/mdobashi0318/LRadioButton.git", :tag => "v#{spec.version}" }
   spec.source_files  = "LRadioButton/**/*.{swift,h,m}"
 
 
