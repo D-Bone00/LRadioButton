@@ -33,14 +33,26 @@ public class LRadioButton: UIButton {
     public weak var delegate: LRadioButtonDelegate?
     
     /// ラジオボタンのビュー
-    public var lRadioView: LRadioView?
+    public var lRadioView: LRadioView = LRadioView()
+    
+    
+    public var height: CGFloat {
+        get {
+            layoutIfNeeded()
+            if titleLabel?.frame.height ?? 0 > lRadioView.frame.height {
+                return titleLabel?.frame.height ?? 0
+            } else {
+                return lRadioView.frame.height
+            }
+        }
+    }
     
     
     /// lRadioViewの選択された時の色とlayerの色を変える
     public var selectColor: UIColor? {
         didSet {
-            lRadioView?.layer.borderColor = selectColor?.cgColor
-            lRadioView?.inView.backgroundColor = selectColor
+            lRadioView.layer.borderColor = selectColor?.cgColor
+            lRadioView.inView.backgroundColor = selectColor
         }
     }
 
@@ -48,24 +60,23 @@ public class LRadioButton: UIButton {
     // MARK: init
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        contentHorizontalAlignment = .left
+        setTitleColor(.black, for: .normal)
+        titleLabel?.numberOfLines = 0
     }
     
     
-    public convenience init(frame: CGRect, title:String? = nil, lRadioViewSize: CGSize, color: UIColor?, tag: Int) {
-        self.init(frame: frame)
+    public convenience init(title:String? = nil, lRadioViewSize: CGSize, color: UIColor?, tag: Int) {
+        self.init()
 
         addTarget(target, action: #selector(radioButtontapAction(sender:)), for: .touchUpInside)
         self.tag = tag
         setTitle(title, for: .normal)
-        setTitleColor(.black, for: .normal)
-        titleEdgeInsets = .init(top: .zero, left: lRadioViewSize.height + 15, bottom: 0, right: 0)
-        contentHorizontalAlignment = .left
-        titleLabel?.numberOfLines = 0
-        titleLabel?.sizeToFit()
-        
-        
-        lRadioView = LRadioView(size: lRadioViewSize, color: color)
+        lRadioView.size = lRadioViewSize
+        titleEdgeInsets = .init(top: .zero, left: lRadioView.size.height + 15, bottom: .zero, right: .zero)
+        lRadioView.color = color
         lRadioViewConstraint()
+        lRadioView.inViewConstraint()
     }
  
     required init?(coder: NSCoder) {
@@ -79,13 +90,13 @@ public class LRadioButton: UIButton {
     
     /// lRadioViewの制約
     func lRadioViewConstraint() {
-        addSubview(lRadioView!)
-        lRadioView?.translatesAutoresizingMaskIntoConstraints = false
-        lRadioView?.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        lRadioView?.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        lRadioView?.heightAnchor.constraint(equalToConstant: (lRadioView?.frame.height)!).isActive = true
-        lRadioView?.widthAnchor.constraint(equalToConstant: (lRadioView?.frame.height)!).isActive = true
-        lRadioView?.layer.borderWidth = 1.5
+        addSubview(lRadioView)
+        lRadioView.translatesAutoresizingMaskIntoConstraints = false
+        lRadioView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        lRadioView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        lRadioView.heightAnchor.constraint(equalToConstant: lRadioView.frame.height).isActive = true
+        lRadioView.widthAnchor.constraint(equalToConstant: lRadioView.frame.height).isActive = true
+        lRadioView.layer.borderWidth = 1.5
         
     }
     
@@ -118,10 +129,9 @@ public class LRadioButton: UIButton {
     /// ビューの部分のbackgroundColorを塗りつぶし、
     /// isSelectをtrueにする
     public func select() {
-        lRadioView?.selectView()
-        lRadioView?.layer.shadowColor = UIColor.black.cgColor
-        lRadioView?.layer.shadowOpacity = 0.2
-        
+        lRadioView.selectView()
+        lRadioView.layer.shadowColor = UIColor.black.cgColor
+        lRadioView.layer.shadowOpacity = 0.2
         isSelect = true
     }
     
@@ -131,10 +141,10 @@ public class LRadioButton: UIButton {
     /// ビューの部分のbackgroundColorを.clearに塗りつぶし、
     /// isSelectをfalseにする
     public func deSelect() {
-        lRadioView?.deselectView()
+        lRadioView.deselectView()
         isSelect = false
-        lRadioView?.layer.shadowColor = UIColor.clear.cgColor
-        lRadioView?.layer.shadowOpacity = 0
+        lRadioView.layer.shadowColor = UIColor.clear.cgColor
+        lRadioView.layer.shadowOpacity = 0
     }
 }
 

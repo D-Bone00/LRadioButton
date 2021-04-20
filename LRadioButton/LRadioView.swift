@@ -14,17 +14,8 @@ import UIKit
 /// 選択状態を表すためのビュー
 public class LRadioView: UIView {
     
-    
-    public override var frame: CGRect {
-        didSet {
-            inView.frame.size = CGSize(width: frame.size.width - 10, height: frame.size.height - 10)
-            inView.layer.cornerRadius = inView.frame.height / 2
-        }
-    }
-    
-    
     /// 選択された時にbackgroundColorを塗りつぶしたりする部分
-    public lazy var inView: UIView = {
+    public var inView: UIView = {
         let view: UIView = UIView()
         view.alpha = 0
         
@@ -32,25 +23,32 @@ public class LRadioView: UIView {
     }()
     
     
+    public var size: CGSize {
+        get { self.frame.size }
+        
+        set {
+            self.frame.size = newValue
+            self.layer.cornerRadius = newValue.height / 2
+        }
+    }
+    
+    public var color: UIColor? {
+        didSet {
+            layer.borderColor = color != nil ? color?.cgColor : UIColor.black.cgColor
+            inView.backgroundColor = color != nil ? color : UIColor.black
+        }
+    }
+    
     // MARK: Init
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-    }
-    
-    
-    public convenience init(size: CGSize, color: UIColor? = nil) {
-        self.init()
-        self.frame.size = size
         
         layer.borderWidth = 1
-        layer.cornerRadius = frame.size.height / 2
-        layer.borderColor = color != nil ? color?.cgColor : UIColor.black.cgColor
         isUserInteractionEnabled = false
-        
-        inView.backgroundColor =  color != nil ? color : UIColor.black
-        inViewConstraint()
+        addSubview(inView)
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -61,13 +59,12 @@ public class LRadioView: UIView {
     
     /// inViewの制約
     public func inViewConstraint() {
-        addSubview(inView)
         inView.translatesAutoresizingMaskIntoConstraints = false
         inView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         inView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        inView.widthAnchor.constraint(equalToConstant: inView.frame.height).isActive = true
-        inView.heightAnchor.constraint(equalToConstant: inView.frame.height).isActive = true
-        
+        inView.widthAnchor.constraint(equalToConstant: size.width - 10).isActive = true
+        inView.heightAnchor.constraint(equalToConstant: size.height - 10).isActive = true
+        inView.layer.cornerRadius = (size.height - 10) / 2
     }
     
     
