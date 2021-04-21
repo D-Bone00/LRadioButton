@@ -101,7 +101,7 @@ class ViewController: UIViewController, LRadioButtonDelegate {
     
     
     
-    func radioButtontapAction(radioButton: LRadioButton) {
+    func didTapLRadioButton(radioButton: LRadioButton) {
         
         for i in 0..<radioButtons.count {
             if radioButton.tag == radioButtons[i].tag {

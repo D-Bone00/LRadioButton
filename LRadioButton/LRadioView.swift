@@ -6,7 +6,6 @@
 //  Copyright © 2019 m.dobashi. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 // MARK: - LRadioView
@@ -23,6 +22,8 @@ public class LRadioView: UIView {
     }()
     
     
+    /// - get: このビューのframe.sizeを取得する
+    /// - set: frame.sizeの設定とcornerRadiusを設定する
     public var size: CGSize {
         get { self.frame.size }
         
@@ -32,6 +33,8 @@ public class LRadioView: UIView {
         }
     }
     
+    
+    /// borderColorと選択時の●の背景色を設定する
     public var color: UIColor? {
         didSet {
             layer.borderColor = color != nil ? color?.cgColor : UIColor.black.cgColor

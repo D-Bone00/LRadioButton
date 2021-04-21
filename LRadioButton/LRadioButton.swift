@@ -6,15 +6,12 @@
 //  Copyright © 2019 m.dobashi. All rights reserved.
 //
 
-import Foundation
 import UIKit
-
-
 
 // MARK: - LRadioButtonDelegate
 
 public protocol LRadioButtonDelegate: class {
-    func radioButtontapAction(radioButton: LRadioButton)
+    func didTapLRadioButton(radioButton: LRadioButton)
 }
 
 
@@ -35,7 +32,9 @@ public class LRadioButton: UIButton {
     /// ラジオボタンのビュー
     public var lRadioView: LRadioView = LRadioView()
     
-    
+    /// titleLabelの高さ
+    ///
+    /// titleLabelより、lRadioViewの方が高ければlRadioViewの高さを返す
     public var height: CGFloat {
         get {
             layoutIfNeeded()
@@ -69,7 +68,7 @@ public class LRadioButton: UIButton {
     public convenience init(title:String? = nil, lRadioViewSize: CGSize, color: UIColor?, tag: Int) {
         self.init()
 
-        addTarget(target, action: #selector(radioButtontapAction(sender:)), for: .touchUpInside)
+        addTarget(target, action: #selector(didTapRadioButton(sender:)), for: .touchUpInside)
         self.tag = tag
         setTitle(title, for: .normal)
         lRadioView.size = lRadioViewSize
@@ -104,8 +103,8 @@ public class LRadioButton: UIButton {
     
     // MARK: LRadioButtonTapAction
     
-    @objc public func radioButtontapAction(sender: LRadioButton) {
-        delegate?.radioButtontapAction(radioButton: sender)
+    @objc public func didTapRadioButton(sender: LRadioButton) {
+        delegate?.didTapLRadioButton(radioButton: sender)
     }
     
     
