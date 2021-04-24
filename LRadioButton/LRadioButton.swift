@@ -17,12 +17,9 @@ public protocol LRadioButtonDelegate: AnyObject {
 
 
 
-
-
 // MARK: - LRadioButton
 
 public class LRadioButton: UIButton {
-    
     
     /// 選択されているかのフラグ
     public var isSelect: Bool = false
@@ -69,6 +66,7 @@ public class LRadioButton: UIButton {
 
     
     // MARK: init
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         contentHorizontalAlignment = .left
@@ -103,7 +101,6 @@ public class LRadioButton: UIButton {
     
     // MARK: Constraint
     
-    
     /// lRadioViewの制約
     func lRadioViewConstraint() {
         addSubview(lRadioView)
@@ -113,7 +110,6 @@ public class LRadioButton: UIButton {
         lRadioView.heightAnchor.constraint(equalToConstant: lRadioView.frame.height).isActive = true
         lRadioView.widthAnchor.constraint(equalToConstant: lRadioView.frame.height).isActive = true
         lRadioView.layer.borderWidth = 1.5
-        
     }
     
     

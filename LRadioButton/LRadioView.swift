@@ -78,7 +78,6 @@ public class LRadioView: UIView {
     ///
     /// inViewにbackgroundColorを設定し、alphaを1にする
     public func selectView() {
-        
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.inView.alpha = 1
         }
@@ -88,7 +87,6 @@ public class LRadioView: UIView {
     ///
     /// inViewのalphaを0にする
     public func deselectView() {
-        
         UIView.animate(withDuration: 0.1) { [weak self] in
             self?.inView.alpha = 0
         }
