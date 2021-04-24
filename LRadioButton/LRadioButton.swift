@@ -47,6 +47,17 @@ public class LRadioButton: UIButton {
     }
     
     
+    /// - get: titleLabel?.textを取得する
+    /// - set: setTitleに設定する
+    public var text: String {
+        get {
+            return titleLabel?.text ?? ""
+        }
+        set {
+            setTitle(newValue, for: .normal)
+        }
+    }
+    
     /// lRadioViewの選択された時の色とlayerの色を変える
     public var selectColor: UIColor? {
         didSet {
@@ -62,17 +73,24 @@ public class LRadioButton: UIButton {
         contentHorizontalAlignment = .left
         setTitleColor(.black, for: .normal)
         titleLabel?.numberOfLines = 0
+        addTarget(target, action: #selector(didTapRadioButton(sender:)), for: .touchUpInside)
     }
     
     
-    public convenience init(title:String? = nil, lRadioViewSize: CGSize, color: UIColor?, tag: Int) {
-        self.init()
-
-        addTarget(target, action: #selector(didTapRadioButton(sender:)), for: .touchUpInside)
-        self.tag = tag
-        setTitle(title, for: .normal)
+    /// テキストとタグを設定する
+    public func setLRadioButton(title:String? = nil, tag: Int? = nil) {
+        if let title = title {
+            text = title
+        }
+        if let tag = tag {
+            self.tag = tag
+        }
+    }
+    
+    /// ラジオボタンの●部分を設定する
+    public func setLRadioView(lRadioViewSize: CGSize, color: UIColor?, margin: CGFloat) {
         lRadioView.size = lRadioViewSize
-        titleEdgeInsets = .init(top: .zero, left: lRadioView.size.height + 15, bottom: .zero, right: .zero)
+        titleEdgeInsets = .init(top: .zero, left: lRadioView.size.height + margin, bottom: .zero, right: .zero)
         lRadioView.color = color
         lRadioViewConstraint()
         lRadioView.inViewConstraint()
@@ -103,23 +121,12 @@ public class LRadioButton: UIButton {
     
     // MARK: LRadioButtonTapAction
     
-    @objc public func didTapRadioButton(sender: LRadioButton) {
-        delegate?.didTapLRadioButton(radioButton: sender)
-    }
-    
-    
-    
-    
     /// ラジオボタンのタップイベント
     ///
     /// - isSelectがtrueの時はラジオボタンの選択状態にする
     /// - isSelectがfalseの時はラジオボタンの選択状態を解除する
-    @objc public func buttonaction(sender: LRadioButton){
-        if isSelect == false {
-            select()
-        } else {
-            deSelect()
-        }
+    @objc public func didTapRadioButton(sender: LRadioButton) {
+        delegate?.didTapLRadioButton(radioButton: sender)
     }
     
     
