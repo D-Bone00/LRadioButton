@@ -30,7 +30,7 @@ public class LRadioButton: UIButton {
     /// デリゲート
     public weak var delegate: LRadioButtonDelegate?
     
-    /// ラジオボタンのビュー
+    /// ラジオボタンの●部分のビュー
     public var lRadioView: LRadioView = LRadioView()
     
     /// titleLabelの高さ
@@ -79,10 +79,8 @@ public class LRadioButton: UIButton {
     
     
     /// テキストとタグを設定する
-    public func setLRadioButton(title:String? = nil, tag: Int? = nil) {
-        if let title = title {
-            text = title
-        }
+    public func setLRadioButton(title: String, tag: Int?) {
+        text = title
         if let tag = tag {
             self.tag = tag
         }
