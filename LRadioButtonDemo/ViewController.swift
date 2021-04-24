@@ -12,6 +12,8 @@ import LRadioButton
 
 class ViewController: UIViewController, LRadioButtonDelegate {
     
+    var lRadioButtons: [LRadioButton] = []
+    
     let label = UILabel()
     
     let radioButton1: LRadioButton = LRadioButton()
@@ -39,22 +41,15 @@ class ViewController: UIViewController, LRadioButtonDelegate {
         label.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         
-        
         createRadioButton1()
-        
         createRadioButton2()
-        
         createRadioButton3()
-        
         createRadioButton4()
 
-        
-        
-     
-        radioButtons.append(radioButton1)
-        radioButtons.append(radioButton2)
-        radioButtons.append(radioButton3)
-        radioButtons.append(radioButton4)
+        lRadioButtons.append(radioButton1)
+        lRadioButtons.append(radioButton2)
+        lRadioButtons.append(radioButton3)
+        lRadioButtons.append(radioButton4)
     }
     
     
@@ -122,7 +117,7 @@ class ViewController: UIViewController, LRadioButtonDelegate {
     
     
     func didTapLRadioButton(radioButton: LRadioButton) {
-        radioButtons.forEach { value in
+        lRadioButtons.forEach { value in
             if radioButton.tag == value.tag {
                 value.select()
                 label.text = radioButton.text

@@ -10,7 +10,8 @@ import UIKit
 
 // MARK: - LRadioButtonDelegate
 
-public protocol LRadioButtonDelegate: class {
+public protocol LRadioButtonDelegate: AnyObject {
+    var lRadioButtons: [LRadioButton] { get }
     func didTapLRadioButton(radioButton: LRadioButton)
 }
 
