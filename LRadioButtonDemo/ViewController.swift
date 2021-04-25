@@ -107,6 +107,7 @@ class ViewController: UIViewController, LRadioButtonDelegate {
                                    margin: 15
         )
         radioButton4.delegate = self
+        radioButton4.titleLabel?.numberOfLines = 0
         view.addSubview(radioButton4)
         radioButton4.translatesAutoresizingMaskIntoConstraints = false
         radioButton4.topAnchor.constraint(equalTo: radioButton3.bottomAnchor, constant: 5).isActive = true

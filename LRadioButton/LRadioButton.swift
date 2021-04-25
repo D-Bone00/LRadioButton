@@ -71,7 +71,6 @@ public class LRadioButton: UIButton {
         super.init(frame: frame)
         contentHorizontalAlignment = .left
         setTitleColor(.black, for: .normal)
-        titleLabel?.numberOfLines = 0
         addTarget(target, action: #selector(didTapRadioButton(sender:)), for: .touchUpInside)
     }
     
