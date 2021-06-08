@@ -101,7 +101,7 @@ public class LRadioButton: UIButton {
     // MARK: Constraint
     
     /// lRadioViewの制約
-    func lRadioViewConstraint() {
+    public func lRadioViewConstraint() {
         addSubview(lRadioView)
         lRadioView.translatesAutoresizingMaskIntoConstraints = false
         lRadioView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true

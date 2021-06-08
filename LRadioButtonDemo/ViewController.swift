@@ -10,7 +10,7 @@ import UIKit
 import LRadioButton
 
 
-class ViewController: UIViewController, LRadioButtonDelegate {
+class ViewController: UIViewController {
     
     var lRadioButtons: [LRadioButton] = []
     
@@ -71,7 +71,7 @@ class ViewController: UIViewController, LRadioButtonDelegate {
     func createRadioButton2() {
         radioButton2.setLRadioButton(title: "radioButton2", tag: 2)
         radioButton2.setLRadioView(lRadioViewSize: CGSize(width: 30, height: 30),
-                                   color: .red,
+                                   color: .blue,
                                    margin: 15
         )
         radioButton2.delegate = self
@@ -85,12 +85,12 @@ class ViewController: UIViewController, LRadioButtonDelegate {
     
     func createRadioButton3() {
         radioButton3.setLRadioView(lRadioViewSize: CGSize(width: 30, height: 30),
-                                   color: .orange,
+                                   color: nil,
                                    margin: 15
         )
         radioButton3.setTitle("radioButton3", for: .normal)
         radioButton3.tag = 3
-        radioButton3.selectColor = .green
+        radioButton3.selectColor = .red
         radioButton3.delegate = self
         view.addSubview(radioButton3)
         radioButton3.translatesAutoresizingMaskIntoConstraints = false
@@ -116,6 +116,13 @@ class ViewController: UIViewController, LRadioButtonDelegate {
         radioButton4.heightAnchor.constraint(equalToConstant: radioButton4.height).isActive = true
     }
     
+}
+
+
+
+// MARK: - LRadioButtonDelegate
+
+extension ViewController: LRadioButtonDelegate {
     
     func didTapLRadioButton(radioButton: LRadioButton) {
         lRadioButtons.forEach { value in
@@ -127,5 +134,5 @@ class ViewController: UIViewController, LRadioButtonDelegate {
             }
         }
     }
-
+    
 }
