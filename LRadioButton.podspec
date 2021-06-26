@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "LRadioButton"
-  spec.version      = "0.1.4"
+  spec.version      = "1.0.0"
   spec.summary      = "create RadioButton"
 
   spec.description  = "You can make a RadioButton"
